@@ -31,15 +31,6 @@ execute \
         run return run function cnk:recipes/distiller/glow_berry_wine
 
 execute \
-        if score $unique_items cnk.dummy matches 3 \
-        if function cnk:distiller/crafting/generic/water if score $water_count cnk.dummy matches 1 \
-        if function cnk:distiller/crafting/generic/fruit if score $fruit_count cnk.dummy matches 1 \
-        if data storage cnk:temp distiller.Items[{id:"minecraft:gunpowder"}] \
-        if function cnk:distiller/crafting/liquid_check/creeping_wine \
-        if function cnk:distiller/crafting/lock \
-        run return run function cnk:recipes/distiller/creeping_wine
-
-execute \
         if score $unique_items cnk.dummy matches 2 \
         if function cnk:distiller/crafting/generic/water if score $water_count cnk.dummy matches 1 \
         if data storage cnk:temp distiller.Items[{id:"minecraft:wheat"}] \
