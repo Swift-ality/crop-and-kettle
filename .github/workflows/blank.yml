@@ -3,25 +3,29 @@ name: CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate UUID and zip repository
+      - name: Generate UUID
+        run: echo "VERSION=$(uuidgen)" >> $GITHUB_ENV
+
+      - name: Zip repository
         run: |
-          VERSION=$(uuidgen)
           ZIP_NAME="Crops&KettelKSMP-version-${VERSION}.zip"
           zip -r "$ZIP_NAME" .
 
-      - name: Upload zip artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v2
         with:
-          name: CropsAndKettelKSMP
-          path: Crops&KettelKSMP-version-*.zip
+          tag_name: "release-${{ env.VERSION }}"
+          name: "Crops&KettelKSMP ${{ env.VERSION }}"
+          files: Crops&KettelKSMP-version-${{ env.VERSION }}.zip
