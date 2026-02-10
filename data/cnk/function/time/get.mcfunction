@@ -1,5 +1,5 @@
 # 2 lunar cycles (5h 20m)
-scoreboard players set $year cnk.dummy 384000
+scoreboard players set $year cnk.dummy 768000
 
 scoreboard players set $day cnk.dummy 24000
 
